@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simulador  de tienda de maquillaje con carrito, cupones, IVA, envío y metodos de pago. Proyecto de JavaScript.">
+    <title>LOLA Beauty | Simulador de Compras</title>
+    <style>
+        :root {
+            --rosa: #c9707f;
+            --rosa-claro: #f8e8eb;
+            --vino: #5a2433;
+            --dorado: #b8935a;
+            --crema: #fffaf7;
+            --texto: #3a2a2e;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--crema);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+        h1, h2, h3 { font-family: Georgia, 'Times New Roman', Times, serif; font-weight: 600;}
+
+        header {
+            background: linear-gradient(135deg,var(--vino), var(--rosa));
+            color: #fff;
+            text-align: center;
+            padding: 5rem 1.5rem 4rem;
+        }
+        .marca {letter-spacing: .35em; text-transform: uppercase; font-size: .85rem; color: #f1d9b5; margin-bottom: 1rem; }
+        header h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 1rem; }
+        header p { max-width: 580px; margin: 0 auto 2rem; opacity:.92; }
+
+        .btn {
+            background: var(--dorado);
+            color: #fff;
+            border: none;
+            padding: .95rem 2.4rem;
+            font-size: 1rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform .2s, background .2s;
+
+        }
+        .btn:hover { background: #a07f4a; transform: translateY(-2px); }
+
+        main { max-width: 1050px; margin: 0 auto; padding:  3.5rem 1.5rem; }
+        section { margin-bottom: 4rem; }
+        section > h2 { text-align: center; color: #8a7479; margin-bottom: 2rem; }
+        .sub { text-align: center; color: #8a7479; margin-bottom: 2rem; }
+
+        .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.4rem; }
+        .card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 1.6rem 1.2rem;
+            text-align: center;
+            border: 1px solid var(--rosa-claro);
+            box-shadow: 0 4px 14px rgba(90, 36, 51, .06);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow:  0 10px 22px rgba(90,36, 51, .12); }
+        .card .icono { font-size: 2.2rem; margin-bottom: .5rem; }
+        .card h3 { font-size: 1.1rem; color: var(--vino); }
+        .card .cat { font-size: .8rem; color: #8a7479; text-transform: uppercase; letter-spacing: .1em; }
+        .card .precio { color: var(--rosa); font-weight: 700; margin-top: .4rem;}
+
+        .beneficios { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2rem; }
+        .nivel { background: var(--rosa-claro); border-radius:14px; padding: 1.4rem 2rem; text-align: center; min-width: 200px; }
+        .nivel strong { display: block; font-size: 1.9rem; color: var(--vino); font-family: Georgia, serif; }
+        .nivel small { color: #7a6269; }
+
+        ol { max-width: 600px; margin: 0 auto ; padding-left: 1.4rem; }
+        ol li { margin-bottom: .6rem; }
+        code { background: var(--rosa-claro); padding: .1rem .45rem; border-radius: 5px; }
+
+        footer {background: var(--vino); color: #e9d6da; text-align: center; padding: 1.8rem 1rem; font-size: .9rem; }
+    </style>
+    <script src="./main.js" defer></script>
+</head>
+<body>
+    
+
+    <header>
+        <p class="marca">LOLA Beauty</p>
+        <h1>Tienda de Maquillaje . Simulador de Compras </h1>
+        <p>Arma tu carrito, aplica cupones, elige tu metodo de pago y tu recibe tu factura. Todo desde ventanas emergentes y la consola.</p>
+        <button class="btn" id="btnIniciar">Iniciar Simulador</button>
+    </header>
+
+    <main>
+        <section>
+            <h2>Nuestro Catalogo</h2>
+            <p class="sub">Precios antes de IVA</p>
+            <div class="grid">
+                <article class="card"><div class="icono">💄</div><p class="cat">Labios</p><h3>Labial mate</h3><p class="precio">$32.000</p></article>
+                <article class="card"><div class="icono">💋</div><p class="cat">Labios</p><h3>Brillo labial</h3><p class="precio">$24.000</p></article>
+                <article class="card"><div class="icono">🧴</div><p class="cat">Rostro</p><h3>Base Liquida</h3><p class="precio">$55.000</p></article>
+                <article class="card"><div class="icono">✨</div><p class="cat">Rostro</p><h3>Corrector</h3><p class="precio">$38.000</p></article>
+                <article class="card"><div class="icono">🌸</div><p class="cat">Rostro</p><h3>Rubor en polvo</h3><p class="precio">$35.000</p></article>
+                <article class="card"><div class="icono">🌟</div><p class="cat">Rostro</p><h3>Iluminador</h3><p class="precio">$48.000</p></article>
+                <article class="card"><div class="icono">👁️</div><p class="cat">Ojos</p><h3>Mascara de pestañas</h3><p class="precio">$42.000</p></article>
+                <article class="card"><div class="icono">🎨</div><p class="cat">Ojos</p><h3>Paleta de sombras</h3><p class="precio">$78.000</p></article>
+                <article class="card"><div class="icono">🖊️</div><p class="cat">Ojos</p><h3>Delineador</h3><p class="precio">$28.000</p></article>
+                <article class="card"><div class="icono">🧽</div><p class="cat">Accesorios</p><h3>Set de brochas</h3><p class="precio">$65.000</p></article>
+            </div>
+        </section>
+
+        <section>
+            <h2>Beneficios de tu compra</h2>
+            <p class="sub">Descuentos, envio y cupones</p>
+            <div class="beneficios">
+                <div class="nivel"><strong>5% - 10% - 15%</strong>Descuento por volumen<br><samll>desde $100.000 - $200.000 y $300.000</samll></div>
+                <div class="nivel"><strong>Envio Gratis</strong>en compras desde $150.000 <br><small>de lo contrario $12.000</small></div>
+                <div class="nivel"><strong>Cupones</strong>LOLA100 - BELLEZAS - PRIMERA15<br><small>de lo contrario $12.000</small></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Como funciona?</h2>
+            <p class="sub">Sigue el menu del simulador</p>
+            <ol>
+                <li>Presiona <strong>Iniciar simulador</strong> e ingresa tu nombre. </li>
+                <li>En el menu principal elige:agregar productos, ver carrito, quitar productos, aplicar cupon o finalizar. </li>
+                <li>Al finalizar, escribe tu direccion y elige el metodo de pago. </li>
+                <li>Revisa tu factura en la alerta y en la consola (<code>F12</code>).</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        <p> 2026 LOLA Beauty - Proyecto  Pre-Entrega 3 - Coderhouse</p>
+    </footer>
+    
+</body>
+</html>
