@@ -6,10 +6,17 @@ Clona o descarga el repositorio.
 Abre index.html en un navegador real (Chrome, Safari o Firefox). La vista previa integrada de VS Code no soporta prompt().
 El simulador inicia al cargar la página. Para reiniciarlo, recarga con Cmd/Ctrl + R.
 Abre la consola (F12) para ver el detalle del carrito y la factura.
+
+
+
 Estructura
 ├── index.html   # Página con el catálogo y los beneficios
 ├── main.js      # Lógica del simulador (funciones)
 └── README.md
+
+
+
+
 Qué hace el simulador
 Pide el nombre del cliente.
 Menú principal: agregar productos, ver carrito, quitar productos, aplicar cupón y finalizar compra.
