@@ -1,5 +1,25 @@
-// LOLA Beauty - Simulador de tienda de maquillaje
-//Interaccion: prompt, alert y consola
+
+// LOLA BEAUTY - SIMULADOR DE TIENDA DE MAQUILLAJE
+// Pre-Entrega 3: Funciones e Integración de Lógica
+//
+// Interacción: prompt (entrada), alert y console (salida)
+//
+// ARQUITECTURA (algoritmo básico de todo programa):
+//   FASE 1 · ENTRADA        -> pedirTexto, pedirEntero, confirmarSiNo
+//   FASE 2 · PROCESAMIENTO  -> calcularImporte, calcularPorcentaje,
+//                              calcularSubtotal, calcularTotales,
+//                              obtenerPorcentajeVolumen, validarCupon,
+//                              agregarAlCarrito, elegirMetodoPago
+//   FASE 3 · SALIDA         -> mostrarCarrito, mostrarFactura
+//
+// TIPOS DE FUNCIÓN USADOS:
+//   Declaradas (function)  -> la mayoría de las funciones
+//   Expresada              -> obtenerPorcentajeVolumen
+//   Flecha (=>)            -> formatoPesos, calcularImporte, calcularPorcentaje,
+//                             cantidadEnCarrito, totalUnidades
+//
+// RETURN: las funciones de entrada, cálculo y construcción de
+// texto retornan valores que se reutilizan en el algoritmo.
 
 //constantes y datos
 
@@ -27,30 +47,32 @@ const catalogo = [
 
 ];
 
-// Funciones Flecha (procesos simples)
+// FASE 2 · PROCESAMIENTO - Funciones flecha (ES6)
+// Optimizan procesos simples y retornan un valor
 
-// Da formato de pesos colombianos 
+// @param {number} valor  -> @returns {string} texto en pesos colombianos
 const formatoPesos = (valor) => "$" + Math.round(valor).toLocaleString("es-CO");
 
-//Importe de una linea del carrito
+// @param {number} precio, {number} cantidad -> @returns {number} importe de la línea
 const calcularImporte = (precio, cantidad) => precio * cantidad;
 
-//Porcentaje de un monto
+// @param {number} monto, {number} porcentaje -> @returns {number} valor del porcentaje
 const calcularPorcentaje  = (monto , porcentaje) => monto * (porcentaje / 100);
 
-// Cantidad de unidades de un producto que ya estan en el carrito
+// @param {Array} carrito, {number} idProducto -> @returns {number} unidades en el carrito
 const cantidadEnCarrito = (carrito, idProducto) => {
     const item = carrito.find((elemento) => elemento.id === idProducto);
     return item ? item.cantidad : 0;
 };
 
-//Total de unidades del carrito
-const totalUnidades = (carrito) => carrito.reduce((acumulado, item) => acumulado + item.cantidad, 0);
+// @param {Array} carrito -> @returns {number} total de unidades
+const totalUnidades = (carrito) => 
+    carrito.reduce((acumulado, item) => acumulado + item.cantidad, 0);
 
 
-//Funcion Expresada (condicionales)
+// FASE 2 · PROCESAMIENTO - Función expresada (condicionales)
 
-//Porcentaje de descuento segun el subtotal de la compra
+// @param {number} subtotal -> @returns {number} % de descuento por volumen
 const obtenerPorcentajeVolumen = function (subtotal) {
     if (subtotal >= 300000 ) {
         return 15;
@@ -63,7 +85,7 @@ const obtenerPorcentajeVolumen = function (subtotal) {
     }
 };
 
-  // Funciones de entrada de datos (prompt + validacion)
+// FASE 1 · ENTRADA DE DATOS (prompt + validación con ciclos)
   
   //Pide un texto no vacio. Retorna null si se cancela.
   function pedirTexto(mensaje) {
@@ -119,7 +141,7 @@ function confirmarSiNo(mensaje) {
         alert('Responde unicamente "si" o "no". ');
     }
 }
-//Funciones que construyen texto (retornan strings)
+// APOYO - Construcción de mensajes (retornan strings)
 
 function construirMenuPrincipal(nombre, carrito, cupon) {
     const estadoCupon = cupon ? cupon.codigo + " (" + cupon.porcentaje + "%)" : "ninguno";
@@ -162,9 +184,7 @@ function construirListadoCarrito(carrito) {
     return texto;
 }
 
-// Funciones de Procesamiento
-
-//Agrega un producto al carrito (o suma la cantidad si ya existe)
+// FASE 2 · PROCESAMIENTO - Funciones declaradas
 
 function agregarAlCarrito(carrito, producto, cantidad) {
     const existente = carrito.find((item) => item.id === producto.id);
@@ -180,8 +200,8 @@ function agregarAlCarrito(carrito, producto, cantidad) {
         });
     }
 }
-
-//Calcula el subtotal del carrito recorriendolo con un ciclo
+ 
+// @param {Array} carrito -> @returns {number} suma de los importes
 function calcularSubtotal(carrito) {
     let subtotal = 0;
 
@@ -192,13 +212,14 @@ function calcularSubtotal(carrito) {
     return subtotal;
 }
 
-//Valida un cupon. Retorna el porcentaje o 0 sino existe .
+// Retorna el porcentaje del cupón o 0 si no existe
+// @param {string} codigo -> @returns {number} % del cupón (0 si no existe)
 function validarCupon(codigo) {
     const clave = codigo.toUpperCase();
     return CUPONES[clave] || 0;
 }
 
-//Calcula todos los valores de la compra y los retorna en un objeto
+// @param {Array} carrito, {Object|null} cupon -> @returns {Object} desglose completo de la compra
 function calcularTotales(carrito, cupon) {
     const subtotal = calcularSubtotal(carrito);
 
@@ -228,7 +249,7 @@ function calcularTotales(carrito, cupon) {
 
 }
 
-// Pide el metodo de pago y retorna un objeto con el total final
+
 function elegirMetodoPago(total) {
     const opcion = pedirEntero(
         "METODO DE PAGO\n" +
@@ -270,7 +291,6 @@ function elegirMetodoPago(total) {
     };
 }
 
-//Descuenta del catalogo las unidades compradas
 function descontarStock(lista, carrito) {
     for (const item of carrito) {
         const producto = lista.find((p) => p.id === item.id);
@@ -278,7 +298,7 @@ function descontarStock(lista, carrito) {
     }
 }
 
-//Funciones de salida (consola + alert)
+// FASE 3 · SALIDA DE RESULTADOS (consola + alert)
 
 function mostrarCarrito(carrito) {
     if (carrito.length === 0) {
@@ -349,7 +369,7 @@ function mostrarFactura(pedido) {
      );
 }
 
-//Flujos de cada opcion del menu
+// CONTROL DE FLUJO - Une las tres fases en cada opción del menú
 
 function flujoAgregarProducto(lista, carrito) {
     const opcion = pedirEntero(construirMenuProductos(lista, carrito), 1, lista.length);
@@ -422,7 +442,7 @@ function flujoAplicarCupon(cuponActual) {
     return { codigo: codigo.toUpperCase(), porcentaje: porcentaje };
 }
 
-//Retorna true si la compra se completo
+// Retorna true si la compra se completo
 function flujoFinalizarCompra(lista, carrito, cupon, nombre) {
     if (carrito.length === 0) {
         alert("Tu carrito esta vacio. Agrega productos antes de finalizar. ");
@@ -472,18 +492,13 @@ function flujoFinalizarCompra(lista, carrito, cupon, nombre) {
 }
 
 //Funcion principal
+
 function iniciarSimulador(lista) {
-
-    //Proteccion: si la funcion se llama desde un vento (clic), 'lista' no es el catalogo
-    if (!Array.isArray(lista)) {
-        lista = catalogo;
-    }
-
-
-    const carrito = [];
+     const carrito = [];
     let cupon = null;
     let compraFinalizada = false;
     let continuar = true;
+
 
     alert(
         "Bienvenida a LOLA Beauty!💄\n\n" +
@@ -501,6 +516,7 @@ function iniciarSimulador(lista) {
     }
 
     //Ciclo Principal: se repite hasta finalizar la compra o salir
+
     while (continuar) {
         const opcion = pedirEntero(construirMenuPrincipal(nombre, carrito, cupon), 1, 5);
 
@@ -535,13 +551,15 @@ function iniciarSimulador(lista) {
     }
 }
 
-//Invocacion del simulador
+// INVOCACIÓN DEL SIMULADOR
+// Se ejecuta cuando la página termina de cargar.
+// Para reiniciar la simulación, recarga la página (Cmd/Ctrl + R).
 
-document.getElementById("btnIniciar").addEventListener("click", () => {
-    try {
+window.addEventListener("load", () => {
+  try {
     iniciarSimulador(catalogo);
-} catch (error) {
+  } catch (error) {
     console.error("Error en el simulador:", error);
-    alert("Ocurrio un error: " + error.message + "\nRevisa la consola (Console) para mas detalles.");
+    alert("Ocurrió un error: " + error.message + "\nRevisa la consola para más detalles.");
 }
 });

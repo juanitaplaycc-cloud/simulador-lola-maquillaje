@@ -34,25 +34,33 @@
         header h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 1rem; }
         header p { max-width: 580px; margin: 0 auto 2rem; opacity:.92; }
 
-        .btn {
-            background: var(--dorado);
-            color: #fff;
-            border: none;
-            padding: .95rem 2.4rem;
-            font-size: 1rem;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform .2s, background .2s;
-
+        .aviso { 
+            display:inline-block;
+            margin-top: 1.8rem;
+            background: rgba(255, 255, 255, .15);
+            border: 1px solid rgba(255, 255, 255, .35);
+            padding: .6rem 1.4rem;
+            border-radius: 50px; 
+            font-size: 9rem;
         }
-        .btn:hover { background: #a07f4a; transform: translateY(-2px); }
 
-        main { max-width: 1050px; margin: 0 auto; padding:  3.5rem 1.5rem; }
-        section { margin-bottom: 4rem; }
-        section > h2 { text-align: center; color: #8a7479; margin-bottom: 2rem; }
-        .sub { text-align: center; color: #8a7479; margin-bottom: 2rem; }
+        main {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 3.5rem 1.5rem;
+        }
+        
+        section {
+            margin-bottom: 4rem;
+        }
+
+        section > h2 {
+            text-align: center;
+            color: var(--vino);
+            font-size: 1.9rem;
+            margin-bottom: 4rem;
+         }
+         .sub { text-align: center; color: #8a7479; margin-bottom: 2rem; }
 
         .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.4rem; }
         .card {
@@ -98,16 +106,16 @@
             <h2>Nuestro Catalogo</h2>
             <p class="sub">Precios antes de IVA</p>
             <div class="grid">
-                <article class="card"><div class="icono">💄</div><p class="cat">Labios</p><h3>Labial mate</h3><p class="precio">$32.000</p></article>
-                <article class="card"><div class="icono">💋</div><p class="cat">Labios</p><h3>Brillo labial</h3><p class="precio">$24.000</p></article>
-                <article class="card"><div class="icono">🧴</div><p class="cat">Rostro</p><h3>Base Liquida</h3><p class="precio">$55.000</p></article>
-                <article class="card"><div class="icono">✨</div><p class="cat">Rostro</p><h3>Corrector</h3><p class="precio">$38.000</p></article>
-                <article class="card"><div class="icono">🌸</div><p class="cat">Rostro</p><h3>Rubor en polvo</h3><p class="precio">$35.000</p></article>
-                <article class="card"><div class="icono">🌟</div><p class="cat">Rostro</p><h3>Iluminador</h3><p class="precio">$48.000</p></article>
-                <article class="card"><div class="icono">👁️</div><p class="cat">Ojos</p><h3>Mascara de pestañas</h3><p class="precio">$42.000</p></article>
-                <article class="card"><div class="icono">🎨</div><p class="cat">Ojos</p><h3>Paleta de sombras</h3><p class="precio">$78.000</p></article>
-                <article class="card"><div class="icono">🖊️</div><p class="cat">Ojos</p><h3>Delineador</h3><p class="precio">$28.000</p></article>
-                <article class="card"><div class="icono">🧽</div><p class="cat">Accesorios</p><h3>Set de brochas</h3><p class="precio">$65.000</p></article>
+                <article class="card"><span class="num">1</span><div class="icono">💄</div><p class="cat">Labios</p><h3>Labial mate</h3><p class="precio">$32.000</p></article>
+                <article class="card"><span class="num">2</span><div class="icono">💋</div><p class="cat">Labios</p><h3>Brillo labial</h3><p class="precio">$24.000</p></article>
+                <article class="card"><span class="num">3</span><div class="icono">🧴</div><p class="cat">Rostro</p><h3>Base Liquida</h3><p class="precio">$55.000</p></article>
+                <article class="card"><span class="num">4</span><div class="icono">✨</div><p class="cat">Rostro</p><h3>Corrector</h3><p class="precio">$38.000</p></article>
+                <article class="card"><span class="num">5</span><div class="icono">🌸</div><p class="cat">Rostro</p><h3>Rubor en polvo</h3><p class="precio">$35.000</p></article>
+                <article class="card"><span class="num">6</span><div class="icono">🌟</div><p class="cat">Rostro</p><h3>Iluminador</h3><p class="precio">$48.000</p></article>
+                <article class="card"><span class="num">7</span><div class="icono">👁️</div><p class="cat">Ojos</p><h3>Mascara de pestañas</h3><p class="precio">$42.000</p></article>
+                <article class="card"><span class="num">8</span><div class="icono">🎨</div><p class="cat">Ojos</p><h3>Paleta de sombras</h3><p class="precio">$78.000</p></article>
+                <article class="card"><span class="num">9</span><div class="icono">🖊️</div><p class="cat">Ojos</p><h3>Delineador</h3><p class="precio">$28.000</p></article>
+                <article class="card"><span class="num">10</span><div class="icono">🧽</div><p class="cat">Accesorios</p><h3>Set de brochas</h3><p class="precio">$65.000</p></article>
             </div>
         </section>
 
